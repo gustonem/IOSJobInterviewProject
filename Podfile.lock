@@ -1,0 +1,20 @@
+PODS:
+  - Alamofire (5.0.0-beta.5)
+  - XCDYouTubeKit (2.7.3)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.0.0-beta.5)
+  - XCDYouTubeKit (~> 2.7)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - XCDYouTubeKit
+
+SPEC CHECKSUMS:
+  Alamofire: 9afb08f7f43efcc71c072374e720fcf67521317d
+  XCDYouTubeKit: 3f4fd3eb3ed494a46a8f007b91315eed6dd6df1f
+
+PODFILE CHECKSUM: d4955cf2be858fec862b613b54c0f92c7cd00371
+
+COCOAPODS: 1.6.1
