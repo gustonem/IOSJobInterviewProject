@@ -12,11 +12,11 @@
 		627946CE2266179700176A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 627946CD2266179700176A1D /* Assets.xcassets */; };
 		627946D12266179700176A1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 627946CF2266179700176A1D /* LaunchScreen.storyboard */; };
 		627946DC2266179700176A1D /* IOSJobInterviewProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627946DB2266179700176A1D /* IOSJobInterviewProjectTests.swift */; };
-		62FCE0002266542C00E41703 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCDFFF2266542C00E41703 /* Movie.swift */; };
 		62FCE0032266548300E41703 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE0022266548300E41703 /* API.swift */; };
-		62FCE0052267312100E41703 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE0042267312100E41703 /* Results.swift */; };
 		62FCE0072267337800E41703 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE0062267337800E41703 /* MoviesViewController.swift */; };
 		62FCE0092267358B00E41703 /* MovieViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE0082267358B00E41703 /* MovieViewCell.swift */; };
+		62FCE00E22676C9300E41703 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE00C22676C9300E41703 /* Movie.swift */; };
+		62FCE00F22676C9300E41703 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE00D22676C9300E41703 /* Results.swift */; };
 		CEC2BDDF4C7ED83C4F1F5A7D /* Pods_IOSJobInterviewProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAF292E96E0099DA658D747 /* Pods_IOSJobInterviewProject.framework */; };
 		E2B0329996978E8A20C59A4A /* Pods_IOSJobInterviewProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1635969428E2DFEC00BB4343 /* Pods_IOSJobInterviewProjectTests.framework */; };
 /* End PBXBuildFile section */
@@ -42,11 +42,11 @@
 		627946D72266179700176A1D /* IOSJobInterviewProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOSJobInterviewProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		627946DB2266179700176A1D /* IOSJobInterviewProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJobInterviewProjectTests.swift; sourceTree = "<group>"; };
 		627946DD2266179700176A1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		62FCDFFF2266542C00E41703 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = SOURCE_ROOT; };
 		62FCE0022266548300E41703 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		62FCE0042267312100E41703 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Results.swift; path = IOSJobInterviewProject/Network/Results.swift; sourceTree = SOURCE_ROOT; };
 		62FCE0062267337800E41703 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		62FCE0082267358B00E41703 /* MovieViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewCell.swift; sourceTree = "<group>"; };
+		62FCE00C22676C9300E41703 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		62FCE00D22676C9300E41703 /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		ADAF292E96E0099DA658D747 /* Pods_IOSJobInterviewProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IOSJobInterviewProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB3899AB51515C433AADBAF4 /* Pods-IOSJobInterviewProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOSJobInterviewProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-IOSJobInterviewProjectTests/Pods-IOSJobInterviewProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C35EE0A083F6C8EF1E17977A /* Pods-IOSJobInterviewProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOSJobInterviewProject.debug.xcconfig"; path = "Target Support Files/Pods-IOSJobInterviewProject/Pods-IOSJobInterviewProject.debug.xcconfig"; sourceTree = "<group>"; };
@@ -97,8 +97,8 @@
 		627946C52266179600176A1D /* IOSJobInterviewProject */ = {
 			isa = PBXGroup;
 			children = (
+				62FCE00B22676C5A00E41703 /* Model */,
 				62FCE0012266547500E41703 /* Network */,
-				627946E6226617DB00176A1D /* Model */,
 				627946E7226617E800176A1D /* View */,
 				627946E8226617F200176A1D /* Controller */,
 				627946C62266179600176A1D /* AppDelegate.swift */,
@@ -115,15 +115,6 @@
 				627946DD2266179700176A1D /* Info.plist */,
 			);
 			path = IOSJobInterviewProjectTests;
-			sourceTree = "<group>";
-		};
-		627946E6226617DB00176A1D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				62FCDFFF2266542C00E41703 /* Movie.swift */,
-				62FCE0042267312100E41703 /* Results.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		627946E7226617E800176A1D /* View */ = {
@@ -150,6 +141,15 @@
 				62FCE0022266548300E41703 /* API.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		62FCE00B22676C5A00E41703 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				62FCE00C22676C9300E41703 /* Movie.swift */,
+				62FCE00D22676C9300E41703 /* Results.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8AB62AC36B4E74D9AFA2EE67 /* Pods */ = {
@@ -350,12 +350,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62FCE0052267312100E41703 /* Results.swift in Sources */,
-				62FCE0002266542C00E41703 /* Movie.swift in Sources */,
+				62FCE00F22676C9300E41703 /* Results.swift in Sources */,
 				62FCE0032266548300E41703 /* API.swift in Sources */,
 				627946C72266179600176A1D /* AppDelegate.swift in Sources */,
 				62FCE0072267337800E41703 /* MoviesViewController.swift in Sources */,
 				62FCE0092267358B00E41703 /* MovieViewCell.swift in Sources */,
+				62FCE00E22676C9300E41703 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
