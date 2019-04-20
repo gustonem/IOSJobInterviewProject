@@ -20,4 +20,12 @@ class API {
                 completion(response.result)
         }
     }
+    
+    static func getDetailedMovie(id: Int, completion: @escaping (Result<Movie, Error>) -> Void) {
+        let jsonDecoder = JSONDecoder()
+        AF.request("https://api.themoviedb.org/3/movie/" + String(id) + "?api_key=" + apiKey )
+            .responseDecodable (decoder: jsonDecoder){ (response: DataResponse<Movie>) in
+                completion(response.result)
+        }
+    }
 }

@@ -49,21 +49,48 @@ class MoviesViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of MealTableViewCell.")
         }
         
-        let url = URL(string: "https://image.tmdb.org/t/p/w500" + movies[indexPath.row].backdrop_path)
+//        let url = URL(string: "https://image.tmdb.org/t/p/w500" + movies[indexPath.row].backdrop_path)
         
-        DispatchQueue.global().async {
-            URLSession.shared.dataTask(with: url!) { data, response, error in
-                guard let data = data else { return }
-                DispatchQueue.main.async {
-                    cell.posterImage.image = UIImage(data: data)
-                }
-                }.resume()
-            
-        }
+//        DispatchQueue.global().async {
+//            URLSession.shared.dataTask(with: url!) { data, response, error in
+//                guard let data = data else { return }
+//                DispatchQueue.main.async {
+//                    cell.posterImage.image = UIImage(data: data)
+//                }
+//                }.resume()
+//
+//        }
+        
+        cell.posterImage.imageFromURL(urlString: "https://image.tmdb.org/t/p/w500" + movies[indexPath.row].backdrop_path)
         
         cell.title.text = movies[indexPath.row].title
         return cell
     }
+    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let storyBoard = UIStoryboard(name: <#T##String#>, bundle: <#T##Bundle?#>)
+//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailedMovieController = segue.destination as! MovieDetailedViewController
+        detailedMovieController.id = movies[(tableView.indexPathForSelectedRow?.row)!].id
+        
+    }
+    
+//    func getImageForMovie(imagePath: String) -> UIImage {
+//
+//        var image: UIImage
+//        let url = URL(string: "https://image.tmdb.org/t/p/w500" + imagePath)
+//        DispatchQueue.global().async {
+//            URLSession.shared.dataTask(with: url!) { data, response, error in
+//                guard let data = data else { return }
+//                DispatchQueue.main.async {
+//                    image = UIImage(data: data)!
+//                }
+//                }.resume()
+//        }
+//        return image
+//    }
 
 
     /*
@@ -111,4 +138,30 @@ class MoviesViewController: UITableViewController {
     }
     */
 
+}
+
+extension UIImageView {
+    public func imageFromURL(urlString: String) {
+        
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator.frame = CGRect.init(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
+        activityIndicator.startAnimating()
+        if self.image == nil{
+            self.addSubview(activityIndicator)
+        }
+        
+        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
+            
+            if error != nil {
+                print(error ?? "No Error")
+                return
+            }
+            DispatchQueue.main.async(execute: { () -> Void in
+                let image = UIImage(data: data!)
+                activityIndicator.removeFromSuperview()
+                self.image = image
+            })
+            
+        }).resume()
+    }
 }
