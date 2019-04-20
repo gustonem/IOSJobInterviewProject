@@ -14,11 +14,12 @@
 		627946DC2266179700176A1D /* IOSJobInterviewProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627946DB2266179700176A1D /* IOSJobInterviewProjectTests.swift */; };
 		62EFD7FD226B2C2D00796683 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EFD7FC226B2C2D00796683 /* Genre.swift */; };
 		62EFD7FF226B427F00796683 /* MovieDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EFD7FE226B427E00796683 /* MovieDetailedViewController.swift */; };
+		62EFD801226B53BB00796683 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EFD800226B53BB00796683 /* Video.swift */; };
+		62EFD803226B6A7E00796683 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EFD802226B6A7E00796683 /* Results.swift */; };
 		62FCE0032266548300E41703 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE0022266548300E41703 /* API.swift */; };
 		62FCE0072267337800E41703 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE0062267337800E41703 /* MoviesViewController.swift */; };
 		62FCE0092267358B00E41703 /* MovieViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE0082267358B00E41703 /* MovieViewCell.swift */; };
 		62FCE00E22676C9300E41703 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE00C22676C9300E41703 /* Movie.swift */; };
-		62FCE00F22676C9300E41703 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FCE00D22676C9300E41703 /* Results.swift */; };
 		CEC2BDDF4C7ED83C4F1F5A7D /* Pods_IOSJobInterviewProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAF292E96E0099DA658D747 /* Pods_IOSJobInterviewProject.framework */; };
 		E2B0329996978E8A20C59A4A /* Pods_IOSJobInterviewProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1635969428E2DFEC00BB4343 /* Pods_IOSJobInterviewProjectTests.framework */; };
 /* End PBXBuildFile section */
@@ -46,11 +47,12 @@
 		627946DD2266179700176A1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62EFD7FC226B2C2D00796683 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		62EFD7FE226B427E00796683 /* MovieDetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailedViewController.swift; sourceTree = "<group>"; };
+		62EFD800226B53BB00796683 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		62EFD802226B6A7E00796683 /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		62FCE0022266548300E41703 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		62FCE0062267337800E41703 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		62FCE0082267358B00E41703 /* MovieViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewCell.swift; sourceTree = "<group>"; };
 		62FCE00C22676C9300E41703 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		62FCE00D22676C9300E41703 /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		ADAF292E96E0099DA658D747 /* Pods_IOSJobInterviewProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IOSJobInterviewProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB3899AB51515C433AADBAF4 /* Pods-IOSJobInterviewProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOSJobInterviewProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-IOSJobInterviewProjectTests/Pods-IOSJobInterviewProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C35EE0A083F6C8EF1E17977A /* Pods-IOSJobInterviewProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOSJobInterviewProject.debug.xcconfig"; path = "Target Support Files/Pods-IOSJobInterviewProject/Pods-IOSJobInterviewProject.debug.xcconfig"; sourceTree = "<group>"; };
@@ -151,9 +153,10 @@
 		62FCE00B22676C5A00E41703 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				62EFD802226B6A7E00796683 /* Results.swift */,
 				62FCE00C22676C9300E41703 /* Movie.swift */,
-				62FCE00D22676C9300E41703 /* Results.swift */,
 				62EFD7FC226B2C2D00796683 /* Genre.swift */,
+				62EFD800226B53BB00796683 /* Video.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -357,11 +360,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				62EFD7FD226B2C2D00796683 /* Genre.swift in Sources */,
-				62FCE00F22676C9300E41703 /* Results.swift in Sources */,
 				62FCE0032266548300E41703 /* API.swift in Sources */,
 				62EFD7FF226B427F00796683 /* MovieDetailedViewController.swift in Sources */,
+				62EFD801226B53BB00796683 /* Video.swift in Sources */,
 				627946C72266179600176A1D /* AppDelegate.swift in Sources */,
 				62FCE0072267337800E41703 /* MoviesViewController.swift in Sources */,
+				62EFD803226B6A7E00796683 /* Results.swift in Sources */,
 				62FCE0092267358B00E41703 /* MovieViewCell.swift in Sources */,
 				62FCE00E22676C9300E41703 /* Movie.swift in Sources */,
 			);
@@ -456,7 +460,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -511,7 +515,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

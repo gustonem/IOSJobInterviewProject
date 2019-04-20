@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import XCDYouTubeKit
+import AVKit
 
 class MovieDetailedViewController: UIViewController {
 
@@ -96,4 +98,48 @@ class MovieDetailedViewController: UIViewController {
         
         return timeStamp
     }
+    
+    @IBAction func watchTrailer(_ sender: UIButton) {
+        
+        API.getVideosForMovie(id: self.id) { result in
+            switch result {
+            case .success(let videos):
+                print(videos.results[0].key)
+                
+                let playerViewController = AVPlayerViewController()
+                self.present(playerViewController, animated: true, completion: nil)
+                
+                XCDYouTubeClient.default().getVideoWithIdentifier(videos.results[0].key) { (video, error) in
+                    guard video != nil else {
+                        // Handle error
+                        return
+                    }
+                    
+                    if let streamURLs = video?.streamURLs {
+                        let streamURL = (streamURLs[XCDYouTubeVideoQuality.HD720.rawValue] ?? streamURLs[XCDYouTubeVideoQuality.medium360.rawValue] ?? streamURLs[XCDYouTubeVideoQuality.small240.rawValue])
+                        playerViewController.player = AVPlayer(url: streamURL!)
+                        playerViewController.player?.play()
+                        
+                        NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerViewController.player?.currentItem)
+     
+//                        Only IOS 11+
+//                        playerViewController.exitsFullScreenWhenPlaybackEnds = true
+                    } else {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            
+            }
+        }
+    }
+    
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+
+    
 }

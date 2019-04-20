@@ -16,8 +16,8 @@ class MoviesViewController: UITableViewController {
         
         API.getPopularMovies{ result in
             switch result {
-            case .success(let results):
-                self.movies = results.results
+            case .success(let movies):
+                self.movies = movies.results
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error.localizedDescription)

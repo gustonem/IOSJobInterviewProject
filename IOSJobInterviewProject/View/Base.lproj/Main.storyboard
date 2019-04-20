@@ -124,6 +124,9 @@
                                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <state key="normal" title="Watch Trailer"/>
+                                                                        <connections>
+                                                                            <action selector="watchTrailer:" destination="nTs-E6-cVY" eventType="touchUpInside" id="wKs-nA-Ypu"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

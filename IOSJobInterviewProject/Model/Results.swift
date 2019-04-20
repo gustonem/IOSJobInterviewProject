@@ -8,7 +8,10 @@
 
 import Foundation
 
-struct Results: Decodable {
-    let page: Int
+struct movieResults: Decodable {
     let results: [Movie]
+}
+
+struct videoResults: Decodable {
+    let results: [Video]
 }
