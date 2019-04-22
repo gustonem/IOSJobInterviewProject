@@ -35,7 +35,6 @@ class MovieDetailedViewController: UIViewController {
         super.viewDidLoad()
 
         self.setConstrains()
-        titleLabel.text = String(id)
         
         API.getDetailedMovie(id: id) { result in
             switch result {
@@ -47,7 +46,6 @@ class MovieDetailedViewController: UIViewController {
                 }
                 
                 self.genresLabel.text? = genres.joined(separator: ", ")
-                
                 
                 self.titleLabel.text = movie.title
                 self.posterImage.imageFromURL(urlString: "https://image.tmdb.org/t/p/w500" + movie.backdrop_path)
@@ -137,9 +135,5 @@ class MovieDetailedViewController: UIViewController {
     
     @objc func playerDidFinishPlaying(note: NSNotification) {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-
-    
+    }  
 }
