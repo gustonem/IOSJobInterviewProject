@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Movie.swift
 //  IOSJobInterviewProject
 //
 //  Created by Augustin Nemec on 16/04/2019.

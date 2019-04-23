@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MoviesViewController.swift
 //  IOSJobInterviewProject
 //
 //  Created by Augustin Nemec on 21/04/2019.
@@ -24,6 +24,8 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Observer to find out when keyboard will show to abjust
+        // searchBar position with keyboardWillShow function
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),
@@ -31,6 +33,8 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             object: nil
         )
         
+        // Observer to find out when keyboard will hide to abjust
+        // searchBar position with keyboardWillHide function
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide),
@@ -41,6 +45,12 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         populateTable()
     }
     
+    /**
+     Function to pupulate tableView with popular movies
+     
+     Contains API call to get all movies and also call to get poster image for each movie.
+     In case of API error, alert is showed with `OK` button to repeat function
+     */
     func populateTable() {
         API.getPopularMovies{ response in
             
@@ -101,6 +111,9 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    /**
+     Function to abjuct searchBar position to be just over the keyboard
+     */
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -114,14 +127,25 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    /**
+     Function to abjuct searchBar position to be on bottom of the view
+     */
     @objc func keyboardWillHide(_ notification: Notification) {
         searchBar.frame.origin.y = self.view.frame.height - searchBar.frame.height
     }
     
+    /**
+     Function to hide keyboard after scrolling
+     */
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchBar.endEditing(true)
     }
     
+    
+    /**
+     Function to prepare next view for segue
+     It sets id and image of selected movie to destination controller
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "toDetail") {
             let detailedMovieController = segue.destination as! MovieDetailedViewController
@@ -136,7 +160,10 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    
+    /**
+     Function to filter movies after text change in search bar
+     If searchbar is empty all movies are showed
+     */
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searching = true
         
@@ -150,8 +177,10 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.reloadData()
     }
     
+    /**
+     Function to hide keyboard after clicking to search button
+     */
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
-        tableView.reloadData()
     }
 }

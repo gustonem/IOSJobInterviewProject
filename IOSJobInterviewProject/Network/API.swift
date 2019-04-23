@@ -13,6 +13,9 @@ class API {
     
     static var apiKey = "f00b506655eee67a4d78a7b9c60bfb40"
     
+    /**
+     API request to get popular movies
+     */
     static func getPopularMovies(completion: @escaping (Result<movieResults, Error>) -> Void) {
         let jsonDecoder = JSONDecoder()
         AF.request("https://api.themoviedb.org/3/movie/popular?api_key=" + apiKey )
@@ -21,6 +24,9 @@ class API {
         }
     }
     
+    /**
+     API request to get detailed movie with specific id
+     */
     static func getDetailedMovie(id: Int, completion: @escaping (Result<Movie, Error>) -> Void) {
         let jsonDecoder = JSONDecoder()
         AF.request("https://api.themoviedb.org/3/movie/" + String(id) + "?api_key=" + apiKey )
@@ -29,6 +35,9 @@ class API {
         }
     }
     
+    /**
+     API request to get all availabble videos for movie with specific id
+     */
     static func getVideosForMovie(id: Int, completion: @escaping (Result<videoResults, Error>) -> Void) {
         let jsonDecoder = JSONDecoder()
         AF.request("https://api.themoviedb.org/3/movie/" + String(id) + "/videos?api_key=" + apiKey )
@@ -37,6 +46,9 @@ class API {
         }
     }
     
+    /**
+     Download request to get image data from url
+     */
     static func getImage(urlString: String, completion: @escaping (Result<Data, Error>) -> Void) {
         AF.download(urlString).responseData { response in
             completion(response.result)

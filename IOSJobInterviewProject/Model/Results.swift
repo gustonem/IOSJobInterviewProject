@@ -1,5 +1,5 @@
 //
-//  Result.swift
+//  Results.swift
 //  IOSJobInterviewProject
 //
 //  Created by Augustin Nemec on 17/04/2019.
