@@ -51,10 +51,9 @@ class MovieDetailedViewController: UIViewController {
                 self.genresLabel.text? = genres.joined(separator: ", ")
                 
                 self.titleLabel.text = movie.title
-                //            self.posterImage.imageFromURL(urlString: "https://image.tmdb.org/t/p/w500" + movie.backdrop_path)
-                
                 self.dateLabel.text = self.convertDateFormatter(date: movie.release_date!)
                 self.overviewLabel.text = movie.overview
+                
             case .failure(let error):
                 
                 let alert = UIAlertController(title: "API error", message: error.localizedDescription, preferredStyle: .alert)
@@ -62,12 +61,7 @@ class MovieDetailedViewController: UIViewController {
                     self.viewDidLoad()
                 }))
                 self.present(alert, animated: true)
-                //                print(error.localizedDescription)
-                
             }
-            
-            
-            
         }
     }
     

@@ -18,7 +18,6 @@ struct Movie: Decodable, Hashable {
     let release_date: String?
     let overview: String?
     
-    
     static func == (lhs: Movie, rhs: Movie) -> Bool {
         return lhs.id == rhs.id
     }
