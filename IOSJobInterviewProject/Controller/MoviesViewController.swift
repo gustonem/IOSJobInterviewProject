@@ -118,11 +118,15 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
+            var bottomPadding: CGFloat = 0
             
+            if #available(iOS 11.0, *) {
+                let window = UIApplication.shared.keyWindow
+                bottomPadding = (window?.safeAreaInsets.bottom)!
+            }
             var frame = self.searchBar.frame
-            frame.origin.y -= keyboardHeight
+            frame.origin.y -= keyboardHeight - bottomPadding
             
-            print(frame.origin.y)
             self.searchBar.frame = frame
         }
     }
@@ -132,6 +136,13 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
      */
     @objc func keyboardWillHide(_ notification: Notification) {
         searchBar.frame.origin.y = self.view.frame.height - searchBar.frame.height
+        var bottomPadding: CGFloat = 0
+        
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.keyWindow
+            bottomPadding = (window?.safeAreaInsets.bottom)!
+        }
+        searchBar.frame.origin.y = self.view.frame.height - searchBar.frame.height - bottomPadding
     }
     
     /**
