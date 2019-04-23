@@ -11,7 +11,6 @@ import XCDYouTubeKit
 import AVKit
 
 class MovieDetailedViewController: UIViewController {
-
     
     @IBOutlet var portraitConstraints: [NSLayoutConstraint]!
     
@@ -27,19 +26,23 @@ class MovieDetailedViewController: UIViewController {
     
     @IBOutlet weak var overviewLabel: UILabel!
     
-    @IBOutlet weak var posterImage: UIImageView!
+    @IBOutlet var posterImage: UIImageView!
     
     var id: Int = 0
+    var image: UIImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.setConstrains()
         
-        API.getDetailedMovie(id: id) { result in
-            switch result {
+        self.posterImage.image = image
+        
+        API.getDetailedMovie(id: id) { response in
+            
+            
+            switch response {
             case .success(let movie):
-                
                 var genres: [String] = []
                 for genre in movie.genres! {
                     genres.append(genre.name)
@@ -48,14 +51,23 @@ class MovieDetailedViewController: UIViewController {
                 self.genresLabel.text? = genres.joined(separator: ", ")
                 
                 self.titleLabel.text = movie.title
-                self.posterImage.imageFromURL(urlString: "https://image.tmdb.org/t/p/w500" + movie.backdrop_path)
+                //            self.posterImage.imageFromURL(urlString: "https://image.tmdb.org/t/p/w500" + movie.backdrop_path)
                 
                 self.dateLabel.text = self.convertDateFormatter(date: movie.release_date!)
                 self.overviewLabel.text = movie.overview
-                
             case .failure(let error):
-                print(error.localizedDescription)
+                
+                let alert = UIAlertController(title: "API error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    self.viewDidLoad()
+                }))
+                self.present(alert, animated: true)
+                //                print(error.localizedDescription)
+                
             }
+            
+            
+            
         }
     }
     
@@ -99,11 +111,11 @@ class MovieDetailedViewController: UIViewController {
     
     @IBAction func watchTrailer(_ sender: UIButton) {
         
-        API.getVideosForMovie(id: self.id) { result in
-            switch result {
+        API.getVideosForMovie(id: self.id) { response in
+            
+            
+            switch response {
             case .success(let videos):
-                print(videos.results[0].key)
-                
                 let playerViewController = AVPlayerViewController()
                 self.present(playerViewController, animated: true, completion: nil)
                 
@@ -119,16 +131,17 @@ class MovieDetailedViewController: UIViewController {
                         playerViewController.player?.play()
                         
                         NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerViewController.player?.currentItem)
-     
-//                        Only IOS 11+
-//                        playerViewController.exitsFullScreenWhenPlaybackEnds = true
+                        
+                        // Only IOS 11+
+                        // playerViewController.exitsFullScreenWhenPlaybackEnds = true
                     } else {
                         self.dismiss(animated: true, completion: nil)
                     }
                 }
             case .failure(let error):
-                print(error.localizedDescription)
-            
+                let alert = UIAlertController(title: "API error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
             }
         }
     }

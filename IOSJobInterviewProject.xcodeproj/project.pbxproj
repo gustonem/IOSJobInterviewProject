@@ -153,8 +153,8 @@
 		62FCE00B22676C5A00E41703 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				62EFD802226B6A7E00796683 /* Results.swift */,
 				62FCE00C22676C9300E41703 /* Movie.swift */,
+				62EFD802226B6A7E00796683 /* Results.swift */,
 				62EFD7FC226B2C2D00796683 /* Genre.swift */,
 				62EFD800226B53BB00796683 /* Video.swift */,
 			);

@@ -9,13 +9,15 @@
 import UIKit
 
 class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-
-    var movies: [Movie] = []
     
-    var filteredMovies: [Movie] = []
+    var movies = [Movie]()
+    
+    var movieWithImage = [Movie:UIImage]()
+    
+    var filteredMovies = [Movie]()
     
     var searching = false
-
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -28,7 +30,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide),
@@ -36,13 +38,40 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             object: nil
         )
         
-        API.getPopularMovies{ result in
-            switch result {
+        populateTable()
+    }
+    
+    func populateTable() {
+        API.getPopularMovies{ response in
+            
+            switch response {
             case .success(let movies):
+                for movie in movies.results {
+                    API.getImage(urlString: "https://image.tmdb.org/t/p/w500" + movie.backdrop_path) { response in
+                        
+                        
+                        switch response {
+                        case .success(let data):
+                            self.movieWithImage[movie] = UIImage(data: data)
+                        case .failure(let error):
+                            let alert = UIAlertController(title: "API error", message: error.localizedDescription, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                                self.populateTable()
+                            }))
+                            self.present(alert, animated: true)
+                        }
+                        
+                        self.tableView.reloadData()
+                    }
+                }
+                
                 self.movies = movies.results
-                self.tableView.reloadData()
             case .failure(let error):
-                print(error.localizedDescription)
+                let alert = UIAlertController(title: "API error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    self.populateTable()
+                }))
+                self.present(alert, animated: true)
             }
         }
     }
@@ -62,10 +91,10 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         if searching {
-            cell.posterImage.imageFromURL(urlString: "https://image.tmdb.org/t/p/w500" + filteredMovies[indexPath.row].backdrop_path)
+            cell.posterImage.image = movieWithImage[filteredMovies[indexPath.row]]
             cell.title.text = filteredMovies[indexPath.row].title
         } else {
-            cell.posterImage.imageFromURL(urlString: "https://image.tmdb.org/t/p/w500" + movies[indexPath.row].backdrop_path)
+            cell.posterImage.image = movieWithImage[movies[indexPath.row]]
             cell.title.text = movies[indexPath.row].title
         }
         
@@ -76,10 +105,12 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-                
+            
             var frame = self.searchBar.frame
             frame.origin.y -= keyboardHeight
-                self.searchBar.frame = frame
+            
+            print(frame.origin.y)
+            self.searchBar.frame = frame
         }
     }
     
@@ -92,12 +123,16 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailedMovieController = segue.destination as! MovieDetailedViewController
-        searchBar.endEditing(true)
-        if searching {
-            detailedMovieController.id = filteredMovies[(tableView.indexPathForSelectedRow?.row)!].id
-        } else {
-            detailedMovieController.id = movies[(tableView.indexPathForSelectedRow?.row)!].id
+        if(segue.identifier == "toDetail") {
+            let detailedMovieController = segue.destination as! MovieDetailedViewController
+            searchBar.endEditing(true)
+            if searching {
+                detailedMovieController.id = filteredMovies[(tableView.indexPathForSelectedRow?.row)!].id
+                detailedMovieController.image = movieWithImage[filteredMovies[(tableView.indexPathForSelectedRow?.row)!]] ?? UIImage()
+            } else {
+                detailedMovieController.id = movies[(tableView.indexPathForSelectedRow?.row)!].id
+                detailedMovieController.image = movieWithImage[movies[(tableView.indexPathForSelectedRow?.row)!]] ?? UIImage()
+            }
         }
     }
     
@@ -110,7 +145,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 return movie.title.lowercased().contains(searchText.lowercased())
             }
         } else {
-                filteredMovies = movies
+            filteredMovies = movies
         }
         tableView.reloadData()
     }
@@ -118,32 +153,5 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
         tableView.reloadData()
-    }
-    
-}
-
-extension UIImageView {
-    public func imageFromURL(urlString: String) {
-        
-        let activityIndicator = UIActivityIndicatorView(style: .gray)
-        activityIndicator.frame = CGRect.init(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
-        activityIndicator.startAnimating()
-        if self.image == nil{
-            self.addSubview(activityIndicator)
-        }
-        
-        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
-            
-            if error != nil {
-                print(error ?? "No Error")
-                return
-            }
-            DispatchQueue.main.async(execute: { () -> Void in
-                let image = UIImage(data: data!)
-                activityIndicator.removeFromSuperview()
-                self.image = image
-            })
-            
-        }).resume()
     }
 }

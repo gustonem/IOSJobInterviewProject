@@ -37,10 +37,10 @@
                                                         <rect key="frame" x="0.0" y="219.5" width="375" height="211"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIs-ME-lhW">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHC-Gn-XnP">
-                                                                        <rect key="frame" x="10" y="10" width="355" height="8"/>
+                                                                        <rect key="frame" x="10" y="10" width="355" height="0.0"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWz-r2-iZH">
-                                                                <rect key="frame" x="0.0" y="33" width="375" height="123"/>
+                                                                <rect key="frame" x="0.0" y="25" width="375" height="131"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2WL-RI-N3y">
@@ -245,7 +245,7 @@
                                         <connections>
                                             <outlet property="posterImage" destination="2nw-vd-69T" id="l7F-21-Cum"/>
                                             <outlet property="title" destination="SSn-j9-hRD" id="0EN-TS-tCz"/>
-                                            <segue destination="nTs-E6-cVY" kind="show" id="aFw-wc-dYg"/>
+                                            <segue destination="nTs-E6-cVY" kind="show" identifier="toDetail" id="aFw-wc-dYg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

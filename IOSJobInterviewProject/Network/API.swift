@@ -36,4 +36,11 @@ class API {
                 completion(response.result)
         }
     }
+    
+    
+    static func getImage(urlString: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        AF.download(urlString).responseData { response in
+            completion(response.result)
+        }
+    }
 }

@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct Movie: Decodable {
-    
+struct Movie: Decodable, Hashable {
     
     let id: Int!
     let title: String
@@ -18,4 +17,13 @@ struct Movie: Decodable {
     let genres: [Genre]?
     let release_date: String?
     let overview: String?
+    
+    
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
